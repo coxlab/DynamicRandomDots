@@ -21,6 +21,8 @@ Plugin* getPlugin() {
 
 
 void DynamicRandomDotsPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-    registry->registerFactory(std::string("stimulus/dynamic_random_dots"),
+    std::string signature = DynamicRandomDots::parameters::getSignature();
+    
+    registry->registerFactory(signature,
 							  (ComponentFactory *)(new SelfDescribingStimulusFactory<DynamicRandomDots>()));
 }

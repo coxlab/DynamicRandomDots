@@ -74,7 +74,7 @@
 
 #define MW_SIGNATURE(SIG)                                                   \
   static std::string getSignature(){                                        \
-    std::string signature(#SIG);                                            \
+    std::string signature(SIG);                                             \
     return signature;                                                       \
   }
 
