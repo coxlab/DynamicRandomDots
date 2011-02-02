@@ -30,7 +30,20 @@ namespace mw{
             ComponentRegistry* reg){
             //shared_ptr<ComponentRegistry> reg){
     cerr << "converting: " << s << endl;
-    return lexical_cast<T>(s);
+    
+    T val; // the return val
+    
+    // Try to cast the string using lexical_cast
+    try {
+        val = lexical_cast<T>(s);
+    } catch (bad_lexical_cast& e){
+        // That didn't work
+        // Maybe it's a variable?
+        VariablePtr var = mw_cast<VariablePtr>(s, reg);
+        val = (T)(var->getValue());
+    }
+    
+    return val;
   }
 
   // -----------------------------------------

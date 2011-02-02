@@ -33,13 +33,13 @@ public:
     
     MW_PARAMETER(tag,               string,           "Dynamic Random Dots");
     MW_PARAMETER(frames_per_second, VariablePtr,      "60.");
-    MW_PARAMETER(field_radius,      VariablePtr,      "10.");
-    MW_PARAMETER(field_center_x,    VariablePtr,      "0.");
-    MW_PARAMETER(field_center_y,    VariablePtr,      "0.");
-    MW_PARAMETER(num_dots,          VariablePtr,      "100");
-    MW_PARAMETER(dot_size,          VariablePtr,      "1.0");
+    MW_PARAMETER(field_radius,      double,           "10.");
+    MW_PARAMETER(field_center_x,    double,           "0.");
+    MW_PARAMETER(field_center_y,    double,           "0.");
+    MW_PARAMETER(num_dots,          int,              "100");
+    MW_PARAMETER(dot_size,          double,           "1.0");
     MW_PARAMETER(color,             ColorTriple,      "1.0,1.0,1.0");
-    MW_PARAMETER(alpha_multiplier,  VariablePtr,      "1.0");
+    MW_PARAMETER(alpha_multiplier,  double,           "1.0");
     MW_PARAMETER(direction,         VariablePtr,      "0");
     MW_PARAMETER(speed,             VariablePtr,      "10");
     
@@ -48,13 +48,13 @@ public:
     static shared_ptr<Component> createComponent(MW_PARAMETERS p){
         DynamicRandomDots *dots = new DynamicRandomDots(p->tag,
                                                         p->frames_per_second,
-                                                        (double)p->field_radius->getValue(),
-                                                        (double)p->field_center_x->getValue(),
-                                                        (double)p->field_center_y->getValue(),
-                                                        (int)p->num_dots->getValue(),
-                                                        (double)p->dot_size->getValue(),
+                                                        p->field_radius,
+                                                        p->field_center_x,
+                                                        p->field_center_y,
+                                                        p->num_dots,
+                                                        p->dot_size,
                                                         p->color,
-                                                        (double)p->alpha_multiplier->getValue(),
+                                                        p->alpha_multiplier,
                                                         p->direction,
                                                         p->speed);
         shared_ptr<DynamicRandomDots> d(dots);
