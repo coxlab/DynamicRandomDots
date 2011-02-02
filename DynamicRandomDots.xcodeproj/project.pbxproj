@@ -33,6 +33,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5C9175A412F90B590026ECDB /* mw_conversion_helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C9175A312F90B590026ECDB /* mw_conversion_helpers.cpp */; };
+		5C9175C412F90E0F0026ECDB /* mw_parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C9175C312F90E0F0026ECDB /* mw_parameters.cpp */; };
 		5CF9AEBC0FD5795C00F405F6 /* DynamicRandomDotsPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9AEB90FD5795C00F405F6 /* DynamicRandomDotsPlugin.cpp */; };
 		5CFCAB0A1105FB4C007CE55F /* MWLibrary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CFCAB091105FB4C007CE55F /* MWLibrary.xml */; };
 		5CFE591A0F571B15000C7F30 /* DynamicRandomDots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE59190F571B15000C7F30 /* DynamicRandomDots.cpp */; };
@@ -75,6 +77,12 @@
 		32DBCF630370AF2F00C91783 /* DynamicRandomDots_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicRandomDots_Prefix.pch; sourceTree = "<group>"; };
 		5C78EE6B115D02EE00151A76 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		5C78EE6C115D02EE00151A76 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
+		5C91755812F8F4430026ECDB /* mw_conversion_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mw_conversion_helpers.h; sourceTree = "<group>"; };
+		5C91755912F8F4430026ECDB /* mw_parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mw_parameters.h; sourceTree = "<group>"; };
+		5C91755A12F8F4430026ECDB /* mw_parameters_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mw_parameters_macros.h; sourceTree = "<group>"; };
+		5C91756212F8FE000026ECDB /* mw_abbreviations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mw_abbreviations.h; sourceTree = "<group>"; };
+		5C9175A312F90B590026ECDB /* mw_conversion_helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mw_conversion_helpers.cpp; sourceTree = "<group>"; };
+		5C9175C312F90E0F0026ECDB /* mw_parameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mw_parameters.cpp; sourceTree = "<group>"; };
 		5CF9AEB90FD5795C00F405F6 /* DynamicRandomDotsPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicRandomDotsPlugin.cpp; sourceTree = SOURCE_ROOT; };
 		5CF9AEBA0FD5795C00F405F6 /* DynamicRandomDotsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicRandomDotsPlugin.h; sourceTree = SOURCE_ROOT; };
 		5CFCAB091105FB4C007CE55F /* MWLibrary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MWLibrary.xml; sourceTree = "<group>"; };
@@ -103,6 +111,7 @@
 		089C166AFE841209C02AAC07 /* DynamicRandomDots */ = {
 			isa = PBXGroup;
 			children = (
+				5C91755312F8F4430026ECDB /* mw_parameters */,
 				5C78EE69115D02C700151A76 /* External Config */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				5CFE591C0F571BEB000C7F30 /* Editor Definitions */,
@@ -184,6 +193,19 @@
 			name = "External Config";
 			sourceTree = "<group>";
 		};
+		5C91755312F8F4430026ECDB /* mw_parameters */ = {
+			isa = PBXGroup;
+			children = (
+				5C91755912F8F4430026ECDB /* mw_parameters.h */,
+				5C9175C312F90E0F0026ECDB /* mw_parameters.cpp */,
+				5C91755812F8F4430026ECDB /* mw_conversion_helpers.h */,
+				5C9175A312F90B590026ECDB /* mw_conversion_helpers.cpp */,
+				5C91755A12F8F4430026ECDB /* mw_parameters_macros.h */,
+				5C91756212F8FE000026ECDB /* mw_abbreviations.h */,
+			);
+			path = mw_parameters;
+			sourceTree = "<group>";
+		};
 		5CFE591C0F571BEB000C7F30 /* Editor Definitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +279,8 @@
 			files = (
 				5CFE591A0F571B15000C7F30 /* DynamicRandomDots.cpp in Sources */,
 				5CF9AEBC0FD5795C00F405F6 /* DynamicRandomDotsPlugin.cpp in Sources */,
+				5C9175A412F90B590026ECDB /* mw_conversion_helpers.cpp in Sources */,
+				5C9175C412F90E0F0026ECDB /* mw_parameters.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,10 +11,10 @@
 #define DynamicRandomDots_H_
 
 #include <boost/random.hpp>
-
 #include <MWorksCore/StandardDynamicStimulus.h>
 
 #include "SelfDescribingComponent.h"
+#include "mw_parameters.h"
 
 using namespace mw;
 
@@ -22,9 +22,60 @@ using namespace mw;
 class DynamicRandomDots : public StandardDynamicStimulus {
 
 public:
-    static void describeParameters(ParameterManifest &manifest);
+    
+    // -----------------------------------------------------------------------
+    // This block is all that need be added to a normal object
+    // in order to generate a validating factory object
+    
+    BEGIN_MW_PARAMETERS
+    
+    MW_SIGNATURE("stimulus/dynamic_random_dots");
+    
+    MW_PARAMETER(tag,               string,           "Dynamic Random Dots");
+    MW_PARAMETER(frames_per_second, VariablePtr,      "60.");
+    MW_PARAMETER(field_radius,      VariablePtr,      "10.");
+    MW_PARAMETER(field_center_x,    VariablePtr,      "0.");
+    MW_PARAMETER(field_center_y,    VariablePtr,      "0.");
+    MW_PARAMETER(num_dots,          VariablePtr,      "100");
+    MW_PARAMETER(dot_size,          VariablePtr,      "1.0");
+    MW_PARAMETER(color,             ColorTriple,      "1.0,1.0,1.0");
+    MW_PARAMETER(alpha_multiplier,  VariablePtr,      "1.0");
+    MW_PARAMETER(direction,         VariablePtr,      "0");
+    MW_PARAMETER(speed,             VariablePtr,      "10");
+    
+    END_MW_PARAMETERS
+    
+    static shared_ptr<Component> createComponent(MW_PARAMETERS p){
+        DynamicRandomDots *dots = new DynamicRandomDots(p->tag,
+                                                        p->frames_per_second,
+                                                        (double)p->field_radius->getValue(),
+                                                        (double)p->field_center_x->getValue(),
+                                                        (double)p->field_center_y->getValue(),
+                                                        (int)p->num_dots->getValue(),
+                                                        (double)p->dot_size->getValue(),
+                                                        p->color,
+                                                        (double)p->alpha_multiplier->getValue(),
+                                                        p->direction,
+                                                        p->speed);
+        shared_ptr<DynamicRandomDots> d(dots);
+        return d;
+    }   
+    // Bog-standard class below this line
+    // -----------------------------------------------------------------------
 
-    DynamicRandomDots(StdStringMap &parameters, MWVariableMap &variables, mw::ComponentRegistry *reg);
+
+    DynamicRandomDots(   string         _tag,
+                         VariablePtr    _frames_per_second,  
+                         GLfloat        field_radius,
+                         GLfloat        field_center_x,
+                         GLfloat        field_center_y,
+                         GLint          num_dots,
+                         GLfloat        dot_size,
+                         ColorTriple    color,
+                         GLfloat        _alpha,
+                         VariablePtr    _direction,
+                         VariablePtr    _speed);
+
     virtual ~DynamicRandomDots();
     
     virtual void willPlay();
@@ -64,7 +115,8 @@ private:
     boost::mt19937 randGen;
     
     MWTime previousTime, currentTime;
-    
+         
+
 };
 
 

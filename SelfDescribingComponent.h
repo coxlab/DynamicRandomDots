@@ -32,9 +32,11 @@ public:
 };
 
 
+// There more of these that need to be put in...
 enum ParameterType {
     PARAM_TYPE_STRING,
-    PARAM_TYPE_VARIABLE
+    PARAM_TYPE_VARIABLE,
+    PARAM_TYPE_UNSPECIFIED
 };
 
 
@@ -138,38 +140,51 @@ class SelfDescribingComponentFactory : public BaseComponentFactory {
     
 public:
     SelfDescribingComponentFactory() {
-        ComponentType::describeParameters(manifest);
+        // just shimming for now; could better integrate later
+        //ComponentType::describeParameters(manifest);
+//        vector<MWParameterDescription> params = 
+//                        ComponentType::parameters::getParameters();
+//        vector<MWParameterDescription>::iterator i;
+//        for(i = params.begin(); i != params.end(); ++i){
+//            MWParameterDescription desc = *i;
+//            manifest.addParameter(desc.name, desc.required, PARAM_TYPE_UNSPECIFIED);
+//        }
+        
     }
     
     virtual boost::shared_ptr<mw::Component> createObject(StdStringMap parameters, mw::ComponentRegistry *reg) {
-        requireAttributes(parameters, manifest.getRequiredParameters());
-
-        const ParameterInfoMap &infoMap = manifest.getParameters();
-        MWVariableMap variables;
-
-        for (StdStringMap::iterator param = parameters.begin(); param != parameters.end(); param++) {
-            const std::string &name = (*param).first;
-            ParameterInfoMap::const_iterator iter = infoMap.find(name);
-
-            if (iter == infoMap.end()) {
-                std::string referenceID("<unknown object>");
-                if (parameters.find("reference_id") != parameters.end()) {
-                    referenceID = parameters["reference_id"];
-                }
-                throw UnknownAttributeException(referenceID, name);
-            }
-
-            const std::string &value = (*param).second;
-            const ParameterInfo &info = (*iter).second;
-            
-            if (info.getParamType() == PARAM_TYPE_VARIABLE) {
-                boost::shared_ptr<mw::Variable> var(reg->getVariable(value));
-                checkAttribute(var, parameters["reference_id"], name, value);
-                variables[name] = var;
-            }
-        }
-
-        return boost::shared_ptr<ComponentType>(new ComponentType(parameters, variables, reg));
+        
+        return ComponentType::createComponent(parameters, reg);
+        
+//        requireAttributes(parameters, manifest.getRequiredParameters());
+//
+//
+//        const ParameterInfoMap &infoMap = manifest.getParameters();
+//        MWVariableMap variables;
+//
+//        for (StdStringMap::iterator param = parameters.begin(); param != parameters.end(); param++) {
+//            const std::string &name = (*param).first;
+//            ParameterInfoMap::const_iterator iter = infoMap.find(name);
+//
+//            if (iter == infoMap.end()) {
+//                std::string referenceID("<unknown object>");
+//                if (parameters.find("reference_id") != parameters.end()) {
+//                    referenceID = parameters["reference_id"];
+//                }
+//                throw UnknownAttributeException(referenceID, name);
+//            }
+//
+//            const std::string &value = (*param).second;
+//            const ParameterInfo &info = (*iter).second;
+//            
+//            if (info.getParamType() == PARAM_TYPE_VARIABLE) {
+//                boost::shared_ptr<mw::Variable> var(reg->getVariable(value));
+//                checkAttribute(var, parameters["reference_id"], name, value);
+//                variables[name] = var;
+//            }
+//        }
+//
+//        return boost::shared_ptr<ComponentType>(new ComponentType(parameters, variables, reg));
     }
 
 };
@@ -184,6 +199,7 @@ public:
         
         newComponent->load(mw::StimulusDisplay::getCurrentStimulusDisplay());
         boost::shared_ptr<mw::StimulusNode> node(new mw::StimulusNode(newComponent));
+        
         reg->registerStimulusNode(parameters["tag"], node);
         
         return newComponent;
